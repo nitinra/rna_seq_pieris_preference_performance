@@ -1,0 +1,15 @@
+## for adults
+for i in $(cat adult_bamlist.list); do samtools sort  $i -o ${i/.sortedByCoord.out.bam/finalsortedbycoord.bam}; done
+for i in $(cat adult_finalsortedbamlist.list); do samtools index  $i  ; done
+source activate featurecounts
+module load samtools/1.5
+featureCounts -p  -t exon -g gene_id -a Pmac_annotated.gtf -o featurecount_results_adult.txt 01-C_R.transcriptAlignedfinalsortedbycoord.bam 02-C_R.transcriptAlignedfinalsortedbycoord.bam 03-C_R.transcriptAlignedfinalsortedbycoord.bam 06-C_R.transcriptAlignedfinalsortedbycoord.bam 08-C_R.transcriptAlignedfinalsortedbycoord.bam 12-C_R.transcriptAlignedfinalsortedbycoord.bam 15-T_R.transcriptAlignedfinalsortedbycoord.bam 24-C_R.transcriptAlignedfinalsortedbycoord.bam 26-T_R.transcriptAlignedfinalsortedbycoord.bam 28-T_R.transcriptAlignedfinalsortedbycoord.bam 31-T_R.transcriptAlignedfinalsortedbycoord.bam 38-C_R.transcriptAlignedfinalsortedbycoord.bam 42-T_R.transcriptAlignedfinalsortedbycoord.bam 43-T_R.transcriptAlignedfinalsortedbycoord.bam 45-T_R.transcriptAlignedfinalsortedbycoord.bam 47-C_R.transcriptAlignedfinalsortedbycoord.bam 48-T_R.transcriptAlignedfinalsortedbycoord.bam 50-C_R.transcriptAlignedfinalsortedbycoord.bam 56-T_R.transcriptAlignedfinalsortedbycoord.bam 
+
+##for larvae
+for i in $(cat larvae_bamlist.list); do samtools sort  $i -o ${i/.sortedByCoord.out.bam/finalsortedbycoord.bam}; done
+for i in $(ls *finalsortedbycoord.bam); do samtools index  $i  ; done
+source activate featurecounts
+module load samtools/gcc/1.5
+featureCounts -p  -t exon -g gene_id -a genomic.gtf -o featurecount_results_2.txt 23-C3_R.transcriptAlignedfinalsortedbycoord.bam 40.1-T3_R.transcriptAlignedfinalsortedbycoord.bam 40.2-T3_R.transcriptAlignedfinalsortedbycoord.bam 40.3-T3_R.transcriptAlignedfinalsortedbycoord.bam 40.4-T3_R.transcriptAlignedfinalsortedbycoord.bam 43.1-T3_R.transcriptAlignedfinalsortedbycoord.bam 43.2-T3_R.transcriptAlignedfinalsortedbycoord.bam 43.3-T3_R.transcriptAlignedfinalsortedbycoord.bam 43.4-T3_R.transcriptAlignedfinalsortedbycoord.bam 43.5-T3_R.transcriptAlignedfinalsortedbycoord.bam 43.6-T3_R.transcriptAlignedfinalsortedbycoord.bam 5.2-C3_R.transcriptAlignedfinalsortedbycoord.bam 53.1-C3_R.transcriptAlignedfinalsortedbycoord.bam 53.2-C3_R.transcriptAlignedfinalsortedbycoord.bam 81.6.6-C3_R.transcriptAlignedfinalsortedbycoord.bam 81.6.7-C3_R.transcriptAlignedfinalsortedbycoord.bam U3C3_R.transcriptAlignedfinalsortedbycoord.bam UC.3.1_R.transcriptAlignedfinalsortedbycoord.bam UC.3.2_R.transcriptAlignedfinalsortedbycoord.bam UC.3.3_R.transcriptAlignedfinalsortedbycoord.bam
+
+source deactivate

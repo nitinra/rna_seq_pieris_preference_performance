@@ -1,0 +1,8 @@
+index=/work/running/rnaseq/results/02.trimmedreads/Pmac_genomedir/
+FILES=/work/running/rnaseq/results/02.trimmedreads/*.trim.fastq.gz
+
+
+STAR --runThreadN 3 --genomeSAindexNbases 13 --genomeDir /work/running/rnaseq/results/02.trimmedreads/Pmac_genomedir/ --runMode genomeGenerate --genomeFastaFiles /work/running/rnaseq/results/02.trimmedreads/genomic.fna --sjdbGTFfile /work/running/rnaseq/results/02.trimmedreads/genomic.gtf 
+
+
+for i in $(ls 02.trimmedreads/*.trim.fastq.gz | sed s/[12].trim.fastq.gz// | sort -u); do STAR --genomeDir 02.trimmedreads/Pmac_genomedir/  --readFilesIn ${i}1.trim.fastq.gz ${i}2.trim.fastq.gz --runThreadN 20 --outFileNamePrefix $i.transcript --outSAMtype BAM SortedByCoordinate --quantMode TranscriptomeSAM --sjdbGTFfile 02.trimmedreads/genomic.gtf --readFilesCommand zcat ; done
